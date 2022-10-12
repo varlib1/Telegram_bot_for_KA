@@ -1,3 +1,4 @@
 Startup:
-uvicorn main:app --host 192.168.0.2 --reload --port 8000
+uvicorn main:app --host 0.0.0.0 --reload --port 8000
+
 python bot.py
