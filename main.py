@@ -1,3 +1,4 @@
+import aiogram.types
 from fastapi import FastAPI, Response
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
@@ -14,9 +15,8 @@ app = FastAPI()
 @app.post("/to_telegram/{telegram}", response_model=ProblemNotification)
 async def send_to_telegram(problem_notification: ProblemNotification):
     problem_notification = jsonable_encoder(problem_notification)
-    #telegram_event = TelegramEvent(problem_notification).make_event()
-    await sendto_telegram(problem_notification)
-    #await sendto_telegram(sendto_telegram, telegram_event)
+    telegram_message: aiogram.types.Message = TelegramEvent(problem_notification).make_message()
+    await sendto_telegram(telegram_message)
     return {"problem_notification": ProblemNotification}
 
 
